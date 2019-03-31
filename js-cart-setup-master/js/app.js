@@ -77,7 +77,6 @@
       },0);
       //round the decimal place
       const finalMoney =totalMoney.toFixed(2);
-
       // interface changes
       document.getElementById('cart-total').textContent = finalMoney;
       document.getElementById('item-count').textContent = total.length;
