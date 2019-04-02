@@ -7,3 +7,6 @@ This was pure for my own education and working on this gave me a sense of what i
 Check it out and try it for yourself.
 
 https://www.youtube.com/watch?v=q_TZhCWbS3I
+
+##Extra Stuff Added
+Adding functionality to the "Clear Cart" Button.

@@ -4,7 +4,6 @@
     // DOM grabs
     const cartInfo = document.getElementById("cart-info");
     const cart = document.getElementById("cart");
-
     //Event listeners
     cartInfo.addEventListener("click", function () {
       cart.classList.toggle("show-cart");
@@ -15,12 +14,20 @@
 (
   function () {
     // DOM grabs
+    const clearBTN = document.getElementById("clear-cart");
     const cartBtn = document.querySelectorAll('.store-item-icon');
-    //Event listener for each since its multiple buttons
+
+    //Clear Button Event Listener
+    clearBTN.addEventListener("click", function() {
+      const cartItems = document.querySelectorAll(".cart-item");
+      $(cartItems).remove();
+      showtotals();
+    });
+
+    //Event listener for each Add to Cart Button since its multiple buttons
     cartBtn.forEach(function (btn) {
       btn.addEventListener("click", function() {
 
-        //console.log(event.target);
         if (event.target.parentElement.classList.contains("store-item-icon")) {
           let fullPath = event.target.parentElement.previousElementSibling.src;
           //manipulate the Image string
@@ -38,28 +45,27 @@
           let finalPrice = price.slice(1).trim();
           item.price = finalPrice
 
-          //console.log(item);
-
           // Creating the Cart Item
           const cartItem = document.createElement("div");
           cartItem.classList.add("cart-item", "d-flex", "justify-content-between", "text-capitalize", "my-3");
           cartItem.innerHTML = `
-          <img src="${item.img}" class="img-fluid rounded-circle" id="item-img" alt="">
-            <div class="item-text">
-            <p id="cart-item-title" class="font-weight-bold mb-0">${item.name}</p>
-              <span>$</span>
-              <span id="cart-item-price" class="cart-item-price" class="mb-0">${item.price}</span>
-            </div>
-            <a href="#" id='cart-item-remove' class="cart-item-remove">
-              <i class="fas fa-trash"></i>
-            </a>`
-            ;
-            //select cart$
-            const cart = document.getElementById('cart');
-            const total = document.querySelector('.cart-total-container');
-            cart.insertBefore(cartItem, total);
-            alert("item added to the cart");
-            showtotals();
+            <img src="${item.img}" class="img-fluid rounded-circle" id="item-img" alt="">
+              <div class="item-text">
+              <p id="cart-item-title" class="font-weight-bold mb-0">${item.name}</p>
+                <span>$</span>
+                <span id="cart-item-price" class="cart-item-price" class="mb-0">${item.price}</span>
+              </div>
+              <a href="#" id='cart-item-remove' class="cart-item-remove">
+                <i class="fas fa-trash"></i>
+              </a>`;
+          //select cart$
+          const cart = document.getElementById('cart');
+          const total = document.querySelector('.cart-total-container');
+          cart.insertBefore(cartItem, total);
+
+          //add the pop-up Alert
+          alert("item added to the cart");
+          showtotals();
         }
       });
     });
@@ -81,7 +87,6 @@
       document.getElementById('cart-total').textContent = finalMoney;
       document.getElementById('item-count').textContent = total.length;
       document.querySelector('.item-total').textContent = finalMoney;
-
     }
   }
 )();
